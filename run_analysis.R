@@ -4,6 +4,8 @@ y_test <- read.table("test/y_test.txt")
 y_train <- read.table("train/y_train.txt")
 subject_test <- read.table("test/subject_test.txt")
 subject_train <- read.table("train/subject_train.txt")
+
+
 #step 1
 X <- rbind(X_train,X_test)
 y <- rbind(y_train,y_test)
@@ -34,6 +36,8 @@ names(total_names)[3:68] <- temp
 total_names <- total_names[,2:69]
 
 #step 5
-tidydata <- aggregate(total_names,by=list(total_names_2$subject_id,total_names_2$activity_name),FUN=mean)
+tidydata <- aggregate(total_names,by=list(total_names$subject_id,total_names$activity_name),FUN=mean)
 names(tidydata)[2] <- "activity_name"
 tidydata <- tidydata[,2:69]
+write.table(tidydata,file="tidydatasample.txt",row.name=FALSE)
+
